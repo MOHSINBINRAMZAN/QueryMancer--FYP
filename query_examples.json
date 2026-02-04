@@ -1,0 +1,77 @@
+[
+  {
+    "question": "Show me all contacts",
+    "sql": "SELECT TOP 15 [RECORD_ID], [CONTACT_NAME], [EMAIL_ADDRESS], [TELEPHONE_1] FROM [CONTACT]",
+    "description": "Basic query to list all contacts with essential information"
+  },
+  {
+    "question": "List all accounts with their status",
+    "sql": "SELECT TOP 15 a.[RECORD_ID], a.[ACCOUNT_NAME], a.[ACCOUNT_STATUS_NAME], a.[EMAIL_ADDRESS] FROM [ACCOUNT] a",
+    "description": "Query to show accounts and their current status"
+  },
+  {
+    "question": "Show contacts and their associated accounts",
+    "sql": "SELECT TOP 15 c.[RECORD_ID], c.[CONTACT_NAME], c.[EMAIL_ADDRESS], a.[ACCOUNT_NAME] FROM [CONTACT] c LEFT JOIN [ACCOUNT] a ON c.[ACCOUNT] = a.[RECORD_ID]",
+    "description": "Join query between contacts and accounts using foreign key relationship"
+  },
+  {
+    "question": "Get all events with their sessions",
+    "sql": "SELECT TOP 15 e.[RECORD_ID], e.[EVENT_NAME], es.[SESSION_NAME], es.[START_TIME] FROM [EVENT] e LEFT JOIN [EVENT_SESSION] es ON es.[EVENT] = e.[RECORD_ID]",
+    "description": "Join query showing events and their associated sessions"
+  },
+  {
+    "question": "Show abstracts submitted for events",
+    "sql": "SELECT TOP 15 ab.[RECORD_ID], ab.[TITLE], ab.[CONTACT_NAME], e.[EVENT_NAME] FROM [ABSTRACT] ab LEFT JOIN [EVENT] e ON ab.[EVENT] = e.[RECORD_ID]",
+    "description": "Query showing abstracts with their event information"
+  },
+  {
+    "question": "List all users in the system",
+    "sql": "SELECT TOP 15 [RECORD_ID], [USER_NAME], [EMAIL_ADDRESS], [STATUS_NAME] FROM [USER]",
+    "description": "Basic query to list system users"
+  },
+  {
+    "question": "Show members and their membership type",
+    "sql": "SELECT TOP 15 a.[RECORD_ID], a.[ACCOUNT_NAME], a.[MEMBER_TYPE_NAME], a.[MEMBER_STATUS_NAME] FROM [ACCOUNT] a WHERE a.[MEMBER_TYPE] IS NOT NULL",
+    "description": "Query showing member accounts with their membership details"
+  },
+  {
+    "question": "Get contact activities",
+    "sql": "SELECT TOP 15 ca.[RECORD_ID], ca.[ACTIVITY_TYPE_NAME], ca.[ACTIVITY_DATE], c.[CONTACT_NAME] FROM [CONTACT_ACTIVITY] ca LEFT JOIN [CONTACT] c ON ca.[CONTACT] = c.[RECORD_ID]",
+    "description": "Query showing contact activities with contact information"
+  },
+  {
+    "question": "Show invoices with account details",
+    "sql": "SELECT TOP 15 i.[RECORD_ID], i.[INVOICE_NUMBER], i.[INVOICE_DATE], i.[TOTAL_AMOUNT], a.[ACCOUNT_NAME] FROM [INVOICE] i LEFT JOIN [ACCOUNT] a ON i.[ACCOUNT] = a.[RECORD_ID]",
+    "description": "Query showing invoices linked to accounts"
+  },
+  {
+    "question": "List products and their categories",
+    "sql": "SELECT TOP 15 p.[RECORD_ID], p.[PRODUCT_NAME], p.[PRODUCT_CODE], pc.[CATEGORY_NAME] FROM [PRODUCT] p LEFT JOIN [PRODUCT_CATEGORY] pc ON p.[PRODUCT_CATEGORY] = pc.[RECORD_ID]",
+    "description": "Query showing products with their category information"
+  },
+  {
+    "question": "Find accounts by area",
+    "sql": "SELECT TOP 15 a.[RECORD_ID], a.[ACCOUNT_NAME], a.[AREA_1_NAME], a.[BILLING_ADDRESS_TOWN] FROM [ACCOUNT] a WHERE a.[AREA_1] IS NOT NULL",
+    "description": "Query to find accounts filtered by geographic area"
+  },
+  {
+    "question": "Show recent donations",
+    "sql": "SELECT TOP 15 d.[RECORD_ID], d.[DONATION_AMOUNT], d.[DONATION_DATE], c.[CONTACT_NAME] FROM [DONATION] d LEFT JOIN [CONTACT] c ON d.[CONTACT] = c.[RECORD_ID] ORDER BY d.[DONATION_DATE] DESC",
+    "description": "Query showing recent donations with donor information"
+  },
+  {
+    "question": "Get abstract reviews and reviewers",
+    "sql": "SELECT TOP 15 ar.[RECORD_ID], ar.[ABSTRACT_NAME], ar.[APPROVED], rev.[CONTACT_NAME] FROM [ABSTRACT_REVIEW] ar LEFT JOIN [ABSTRACT_REVIEWER] rev ON ar.[EVALUATED_BY] = rev.[RECORD_ID]",
+    "description": "Query showing abstract reviews with reviewer details"
+  },
+  {
+    "question": "Show email campaigns with their status",
+    "sql": "SELECT TOP 15 ec.[RECORD_ID], ec.[CAMPAIGN_NAME], ec.[STATUS_NAME], ec.[SEND_DATE] FROM [EMAIL_CAMPAIGN] ec ORDER BY ec.[SEND_DATE] DESC",
+    "description": "Query listing email campaigns"
+  },
+  {
+    "question": "List opportunities by stage",
+    "sql": "SELECT TOP 15 o.[RECORD_ID], o.[OPPORTUNITY_NAME], o.[STAGE_NAME], o.[EXPECTED_VALUE], a.[ACCOUNT_NAME] FROM [OPPORTUNITY] o LEFT JOIN [ACCOUNT] a ON o.[ACCOUNT] = a.[RECORD_ID]",
+    "description": "Query showing sales opportunities with account information"
+  }
+]

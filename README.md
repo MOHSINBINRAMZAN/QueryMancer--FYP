@@ -1,1 +1,1 @@
-# QueryMancer--FYP
+# QueryMancer
