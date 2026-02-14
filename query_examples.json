@@ -1,0 +1,152 @@
+[
+  {
+    "question": "Show me all contacts",
+    "sql": "SELECT TOP 15 [RECORD_ID], [FIRST_NAME], [LAST_NAME], [PRIMARY_EMAIL], [MOBILE] FROM [CONTACT] WHERE [DELETED] = 0",
+    "description": "Basic query to list all active contacts with essential information"
+  },
+  {
+    "question": "List all accounts with their status",
+    "sql": "SELECT TOP 15 [RECORD_ID], [ACCOUNT_NAME], [ACCOUNT_STATUS_NAME], [EMAIL_ADDRESS], [TELEPHONE_1] FROM [ACCOUNT] WHERE [DELETED] = 0",
+    "description": "Query to show accounts and their current status"
+  },
+  {
+    "question": "Show contacts and their associated accounts",
+    "sql": "SELECT TOP 15 c.[RECORD_ID], c.[FIRST_NAME], c.[LAST_NAME], c.[PRIMARY_EMAIL], a.[ACCOUNT_NAME] FROM [CONTACT] c LEFT JOIN [ACCOUNT] a ON c.[MAIN_ACCOUNT] = a.[RECORD_ID] WHERE c.[DELETED] = 0",
+    "description": "Join query between contacts and accounts using MAIN_ACCOUNT foreign key"
+  },
+  {
+    "question": "Get all events with their sessions",
+    "sql": "SELECT TOP 15 e.[RECORD_ID], e.[EVENT_NAME], e.[START_DATE], es.[DESCRIPTION] AS SESSION_NAME, es.[START_TIME] FROM [EVENT] e LEFT JOIN [EVENT_SESSION] es ON es.[EVENT] = e.[RECORD_ID] WHERE e.[DELETED] = 0",
+    "description": "Join query showing events and their associated sessions"
+  },
+  {
+    "question": "Show abstracts submitted for events",
+    "sql": "SELECT TOP 15 ab.[RECORD_ID], ab.[TITLE], ab.[CONTACT_NAME], ab.[EVENT_NAME] FROM [ABSTRACT] ab WHERE ab.[DELETED] = 0 ORDER BY ab.[DATE_CREATED_ON] DESC",
+    "description": "Query showing abstracts with their event information"
+  },
+  {
+    "question": "Show members and their membership type",
+    "sql": "SELECT TOP 15 [RECORD_ID], [ACCOUNT_NAME], [MEMBER_TYPE_NAME], [MEMBER_STATUS_NAME], [MEMBER_CATEGORY_NAME] FROM [ACCOUNT] WHERE [MEMBER_TYPE] IS NOT NULL AND [DELETED] = 0",
+    "description": "Query showing member accounts with their membership details"
+  },
+  {
+    "question": "Get contact activities",
+    "sql": "SELECT TOP 15 a.[RECORD_ID], a.[TYPE_NAME] AS ACTIVITY_TYPE, a.[DATE] AS ACTIVITY_DATE, a.[CONTACT_NAME], a.[ORGANISATION_NAME] FROM [ACTIVITY] a WHERE a.[DELETED] = 0 ORDER BY a.[DATE] DESC",
+    "description": "Query showing activities with contact and organization information"
+  },
+  {
+    "question": "Find accounts by area",
+    "sql": "SELECT TOP 15 [RECORD_ID], [ACCOUNT_NAME], [AREA_1_NAME], [BILLING_ADDRESS_TOWN], [BILLING_ADDRESS_POSTCODE] FROM [ACCOUNT] WHERE [AREA_1] IS NOT NULL AND [DELETED] = 0",
+    "description": "Query to find accounts filtered by geographic area"
+  },
+  {
+    "question": "Show recent donations",
+    "sql": "SELECT TOP 15 d.[RECORD_ID], d.[SHORT_DESCRIPTION], d.[DONATION_DATE], d.[DONOR_CONTACT_NAME], d.[FUND_NAME] FROM [DONATION] d WHERE d.[DELETED] = 0 ORDER BY d.[DONATION_DATE] DESC",
+    "description": "Query showing recent donations with donor and fund information"
+  },
+  {
+    "question": "Get abstract reviews and reviewers",
+    "sql": "SELECT TOP 15 ar.[RECORD_ID], ar.[ABSTRACT_NAME], ar.[APPROVED], ar.[EVALUATED_BY_NAME], ar.[DECISION_DATE] FROM [ABSTRACT_REVIEW] ar WHERE ar.[DELETED] = 0",
+    "description": "Query showing abstract reviews with reviewer details"
+  },
+  {
+    "question": "Show campaigns with their details",
+    "sql": "SELECT TOP 15 [RECORD_ID], [SHORT_DESCRIPTION] AS CAMPAIGN_NAME, [START_DATE], [END_DATE], [INCOME_TARGET], [INCOME_TO_DATE] FROM [CAMPAIGN] WHERE [DELETED] = 0 ORDER BY [START_DATE] DESC",
+    "description": "Query listing marketing campaigns with financial targets"
+  },
+  {
+    "question": "List event registrations",
+    "sql": "SELECT TOP 15 er.[RECORD_ID], er.[REGISTRATION_ID], er.[BOOKER_NAME], er.[EVENT_NAME], er.[REGISTRATION_STATUS_NAME], er.[REGISTRATION_DATE] FROM [EVENT_REGISTRATION] er WHERE er.[DELETED] = 0 ORDER BY er.[REGISTRATION_DATE] DESC",
+    "description": "Query showing event registrations with status"
+  },
+  {
+    "question": "Find contacts in Lahore",
+    "sql": "SELECT TOP 15 [RECORD_ID], [FIRST_NAME], [LAST_NAME], [PRIMARY_EMAIL], [MAILING_ADDRESS_TOWN] FROM [CONTACT] WHERE [MAILING_ADDRESS_TOWN] LIKE '%Lahore%' AND [DELETED] = 0",
+    "description": "Query to find contacts by city name"
+  },
+  {
+    "question": "Show course bookings with delegate info",
+    "sql": "SELECT TOP 15 cb.[RECORD_ID], cb.[COURSE_NAME], cb.[CONTACT_NAME] AS DELEGATE, cb.[BOOKING_STATUS_NAME], cb.[BOOKING_DATE] FROM [COURSE_BOOKING] cb WHERE cb.[DELETED] = 0 ORDER BY cb.[BOOKING_DATE] DESC",
+    "description": "Query showing course bookings with delegate information"
+  },
+  {
+    "question": "Get helpdesk tickets by priority",
+    "sql": "SELECT TOP 15 h.[RECORD_ID], h.[ISSUE_ID], h.[DESCRIPTION], h.[PRIORITY_NAME], h.[STATUS_NAME], h.[DATE_RAISED] FROM [HELPDESK] h WHERE h.[DELETED] = 0 ORDER BY h.[DATE_RAISED] DESC",
+    "description": "Query showing helpdesk issues sorted by date"
+  },
+  {
+    "question": "Find members by membership status",
+    "sql": "SELECT TOP 15 [RECORD_ID], [ACCOUNT_NAME], [MEMBER_STATUS_NAME], [MEMBER_TYPE_NAME], [EMAIL_ADDRESS] FROM [ACCOUNT] WHERE [MEMBER_STATUS] IS NOT NULL AND [DELETED] = 0",
+    "description": "Query to find accounts with active membership status"
+  },
+  {
+    "question": "Show committee members",
+    "sql": "SELECT TOP 15 cm.[RECORD_ID], cm.[COMMITTEE_NAME], cm.[COMMITTEE_MEMBER_NAME], cm.[MEMBER_DESIGNATION_NAME], cm.[MEMBER__FROM_] AS START_DATE FROM [COMMITTEE_MEMBER] cm WHERE cm.[DELETED] = 0 AND cm.[ACTIVE] = 1",
+    "description": "Query showing active committee members with their designations"
+  },
+  {
+    "question": "Get grants by status",
+    "sql": "SELECT TOP 15 g.[RECORD_ID], g.[GRANT_ID], g.[GRANT_DESCRIPTION], g.[GRANT_STATUS_NAME], g.[GRANT_VALUE], g.[CONTACT_NAME] FROM [GRANTS] g WHERE g.[DELETED] = 0 ORDER BY g.[DATE_CREATED_ON] DESC",
+    "description": "Query showing grants with their status and assigned contact"
+  },
+  {
+    "question": "List assessments with results",
+    "sql": "SELECT TOP 15 a.[RECORD_ID], a.[ASSESSMENT_ID], a.[CONTACT_NAME], a.[ASSESSMENT_TYPE_NAME], a.[STATUS_NAME], a.[ASSESSMENT_DATE] FROM [ASSESSMENT] a WHERE a.[DELETED] = 0 ORDER BY a.[ASSESSMENT_DATE] DESC",
+    "description": "Query showing assessments with their type and status"
+  },
+  {
+    "question": "Show event delegates for an event",
+    "sql": "SELECT TOP 15 ed.[RECORD_ID], ed.[EVENT_NAME], ed.[DELEGATE_NAME], ed.[DELEGATE_TYPE_NAME], ed.[ATTENDED], ed.[REGISTRATION_STATUS_NAME] FROM [EVENT_DELEGATE] ed WHERE ed.[DELETED] = 0",
+    "description": "Query showing event delegates with attendance status"
+  },
+  {
+    "question": "Find accounts by industry sector",
+    "sql": "SELECT TOP 15 [RECORD_ID], [ACCOUNT_NAME], [INDUSTRY_SECTOR_NAME], [INDUSTRY_SUB_SECTOR_NAME], [BILLING_ADDRESS_TOWN] FROM [ACCOUNT] WHERE [INDUSTRY_SECTOR] IS NOT NULL AND [DELETED] = 0",
+    "description": "Query to find accounts by their industry classification"
+  },
+  {
+    "question": "Get diary actions assigned to users",
+    "sql": "SELECT TOP 15 da.[RECORD_ID], da.[SUBJECT], da.[ASSIGNED_TO_NAME], da.[DUE_DATE], da.[STATUS_NAME], da.[PRIORITY_NAME] FROM [DIARY_ACTION] da WHERE da.[DELETED] = 0 AND da.[COMPLETED] = 0 ORDER BY da.[DUE_DATE]",
+    "description": "Query showing pending diary actions with assignments"
+  },
+  {
+    "question": "Show communication history for contacts",
+    "sql": "SELECT TOP 15 ch.[RECORD_ID], ch.[CONTACT_NAME], ch.[COMM_MODE_TYPE_NAME] AS MODE, ch.[DATE_OF_COMMS], ch.[DESCRIPTION] FROM [COMMUNICATION_HISTORY] ch WHERE ch.[DELETED] = 0 ORDER BY ch.[DATE_OF_COMMS] DESC",
+    "description": "Query showing communication history with contacts"
+  },
+  {
+    "question": "List accounts by region",
+    "sql": "SELECT TOP 15 [RECORD_ID], [ACCOUNT_NAME], [REGION_NAME], [BILLING_ADDRESS_TOWN], [TELEPHONE_1] FROM [ACCOUNT] WHERE [REGION] IS NOT NULL AND [DELETED] = 0",
+    "description": "Query to find accounts grouped by region"
+  },
+  {
+    "question": "Get credit notes with transaction details",
+    "sql": "SELECT TOP 15 cn.[RECORD_ID], cn.[CREDIT_NOTE_NUMBER], cn.[ACCOUNT_NAME], cn.[CREDIT_NOTE_DATE], cn.[CREDIT_NOTE_AMOUNT] FROM [CREDIT_NOTE] cn WHERE cn.[DELETED] = 0 ORDER BY cn.[CREDIT_NOTE_DATE] DESC",
+    "description": "Query showing credit notes with account information"
+  },
+  {
+    "question": "Show contacts with qualifications",
+    "sql": "SELECT TOP 15 cq.[RECORD_ID], cq.[CONTACT_NAME], cq.[QUALIFICATION_NAME], cq.[INSTITUTION_NAME], cq.[DATE_OF_QUALIFICATION_AWARDED] FROM [CONTACT_QUALIFICATION] cq WHERE cq.[DELETED] = 0",
+    "description": "Query showing contact qualifications and awarding institutions"
+  },
+  {
+    "question": "Find bids by status",
+    "sql": "SELECT TOP 15 b.[RECORD_ID], b.[BID_TITLE], b.[CONTACT_NAME], b.[BID_STATUS_NAME], b.[DEADLINE], b.[MAXIMUM_DONATION] FROM [BID] b WHERE b.[DELETED] = 0 ORDER BY b.[DEADLINE]",
+    "description": "Query showing bids with their status and deadlines"
+  },
+  {
+    "question": "Get event sessions for a specific event",
+    "sql": "SELECT TOP 15 es.[RECORD_ID], es.[EVENT_NAME], es.[DESCRIPTION] AS SESSION_NAME, es.[START_DATE], es.[START_TIME], es.[END_TIME], es.[SPEAKER_TUTOR_NAME] FROM [EVENT_SESSION] es WHERE es.[DELETED] = 0 ORDER BY es.[START_DATE], es.[START_TIME]",
+    "description": "Query showing event sessions with timing and speaker details"
+  },
+  {
+    "question": "Show accounts with outstanding balance",
+    "sql": "SELECT TOP 15 [RECORD_ID], [ACCOUNT_NAME], [TOTAL_OUTSTANDING], [TOTAL_DEBIT], [TOTAL_CREDIT], [EMAIL_ADDRESS] FROM [ACCOUNT] WHERE [TOTAL_OUTSTANDING] > 0 AND [DELETED] = 0 ORDER BY [TOTAL_OUTSTANDING] DESC",
+    "description": "Query to find accounts with outstanding financial balance"
+  },
+  {
+    "question": "List consultancy projects with status",
+    "sql": "SELECT TOP 15 cp.[RECORD_ID], cp.[PROJECT_DESCRIPTION], cp.[ACCOUNT_NAME], cp.[STATUS_NAME], cp.[PROJECT_START_DATE], cp.[AGREED_PRICE_TO_CUSTOMER] FROM [CONSULTANCY_PROJECT] cp WHERE cp.[DELETED] = 0 ORDER BY cp.[PROJECT_START_DATE] DESC",
+    "description": "Query showing consultancy projects with financial details"
+  }
+]

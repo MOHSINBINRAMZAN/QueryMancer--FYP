@@ -1,0 +1,114 @@
+# ================================
+# Querymancer Local AI SQL Chatbot
+# Python Dependencies
+# ================================
+
+# === Core Framework ===
+streamlit>=1.28.0
+python-dotenv>=1.0.0
+
+# === LangChain for Local AI ===
+langchain>=0.1.0
+langchain-ollama>=0.1.0
+langchain-core>=0.1.0
+langchain-community>=0.0.20
+
+# === Database Connectivity ===
+pyodbc>=4.0.39
+sqlalchemy>=2.0.0
+pymssql>=2.2.8
+
+# === Data Processing ===
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0
+
+# === HTTP Requests ===
+requests>=2.31.0
+urllib3>=2.0.0
+httpx>=0.25.0
+
+# === JSON & Data Validation ===
+pydantic>=2.0.0
+jsonschema>=4.19.0
+
+# === Text Processing & Fuzzy Matching ===
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.21.0
+difflib2>=0.1.0
+
+# === Utilities ===
+pathlib2>=2.3.7
+hashlib2>=1.0.1
+typing-extensions>=4.8.0
+dataclasses-json>=0.6.0
+
+# === Logging & Monitoring ===
+structlog>=23.1.0
+colorlog>=6.7.0
+
+# === UI Enhancements ===
+streamlit-chat>=0.1.1
+streamlit-elements>=0.1.0
+plotly>=5.17.0
+altair>=5.0.0
+
+# === RAG with FAISS Vector Database ===
+faiss-cpu>=1.7.4
+# Use faiss-gpu instead for GPU acceleration: faiss-gpu>=1.7.4
+
+# === Security ===
+cryptography>=41.0.0
+bcrypt>=4.0.1
+
+# === Testing (Optional) ===
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.11.0
+
+# === Development Tools (Optional) ===
+black>=23.9.0
+flake8>=6.0.0
+mypy>=1.5.0
+pre-commit>=3.4.0
+
+# === System Dependencies Notes ===
+# 
+# Additional system-level dependencies required:
+#
+# For Windows:
+# - Microsoft ODBC Driver 17 for SQL Server
+#   Download: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
+
+#
+# Ollama Installation:
+# - Visit: https://ollama.ai/download
+# - After installation, run: ollama pull mistral
+#
+# ================================
+# Installation Commands:
+# ================================
+#
+# 1. Create virtual environment:
+#    python -m venv venv
+#    source venv/bin/activate  # On Windows: venv\Scripts\activate
+#
+# 2. Install Python dependencies:
+#    pip install -r requirements.txt
+#
+# 3. Install and start Ollama:
+#    # Download from https://ollama.ai/download
+#    ollama serve
+#    ollama pull mistral
+#
+# 4. Configure environment:
+#    cp .env.example .env
+#    # Edit .env with your AWS SQL Server credentials
+#
+# 5. Create schema file:
+#    # Add your database schema to schemas/schema.json
+#
+# 6. Run the chatbot:
+#    streamlit run app.py
+#
+# ================================
