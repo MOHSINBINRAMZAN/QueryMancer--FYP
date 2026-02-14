@@ -189,45 +189,7 @@ The `schema.json` file defines your database structure. QueryMancer uses this fo
 
 ## 🎯 Usage
 
-### Basic Queries
 
-```
-User: Show me all contacts who registered for events this month
-QueryMancer:
-SELECT c.FIRST_NAME, c.LAST_NAME, e.TITLE, ed.REGISTRATION_DATE
-FROM CONTACT c
-JOIN EVENT_DELEGATE ed ON ed.CONTACT = c.RECORD_ID
-JOIN EVENT e ON e.RECORD_ID = ed.EVENT
-WHERE ed.REGISTRATION_DATE >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0)
-AND c.DELETED = 0
-```
-
-### Complex Analytics
-
-```
-User: What are the top 5 accounts by total donation amount?
-QueryMancer:
-SELECT TOP 5 a.COMPANY_NAME, SUM(d.AMOUNT) AS total_donations
-FROM ACCOUNT a
-JOIN DONATION d ON d.ACCOUNT = a.RECORD_ID
-WHERE a.DELETED = 0
-GROUP BY a.COMPANY_NAME
-ORDER BY total_donations DESC
-```
-
-### Membership Queries
-
-```
-User: Count members by membership type
-QueryMancer:
-SELECT MEMBER_TYPE_NAME, COUNT(*) AS member_count
-FROM ACCOUNT
-WHERE MEMBER = 1 AND DELETED = 0
-GROUP BY MEMBER_TYPE_NAME
-ORDER BY member_count DESC
-```
-
----
 
 ## 📁 Project Structure
 
