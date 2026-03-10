@@ -174,8 +174,8 @@ relevant_context = rag_engine.search(
 
 The RAG engine searches FAISS indices to find:
 
-- **Relevant tables**: CONTACT, EVENT_DELEGATE, EVENT
-- **Relevant columns**: FIRST_NAME, LAST_NAME, REGISTRATION_DATE
+- **Relevant tables**:
+- **Relevant columns**: 
 - **Similar examples**: Pre-existing NL-SQL pairs
 
 ### Step 3: LLM Query Generation
