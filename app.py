@@ -6,6 +6,10 @@ Current Date and Time:
 Current User: 
 """
 
+# Suppress Pydantic V1 compatibility warning on Python 3.14+
+import warnings
+warnings.filterwarnings("ignore", message="Core Pydantic V1 functionality isn't compatible")
+
 # Ensure proper encoding for Windows console
 import sys
 import os
@@ -185,6 +189,25 @@ class DatabaseManager:
         self.engine = None
         self._test_connection()
     
+    def _validate_query(self, query: str) -> None:
+        """Validate SQL query for security - only allow SELECT queries"""
+        query_upper = query.upper().strip()
+        
+        # Only allow SELECT statements (and WITH for CTEs)
+        if not query_upper.startswith('SELECT') and not query_upper.startswith('WITH'):
+            raise ValueError("Only SELECT queries are allowed. Data modification operations (INSERT, UPDATE, DELETE) are blocked for security.")
+        
+        # Block dangerous keywords even in subqueries
+        blocked_keywords = [
+            'DROP', 'DELETE', 'UPDATE', 'INSERT', 'ALTER', 'CREATE', 
+            'TRUNCATE', 'EXEC', 'EXECUTE', 'SP_', 'XP_', 'OPENROWSET',
+            'OPENDATASOURCE', 'BULK', 'BACKUP', 'RESTORE', 'GRANT', 'REVOKE'
+        ]
+        
+        for keyword in blocked_keywords:
+            if re.search(r'\b' + re.escape(keyword) + r'\b', query_upper):
+                raise ValueError(f"Blocked operation detected: {keyword}. Only SELECT queries are allowed.")
+    
     def _build_connection_string(self) -> str:
         """Build SQL Server connection string"""
         if DB_CONFIG['username'] and DB_CONFIG['password']:
@@ -223,6 +246,9 @@ class DatabaseManager:
         """Execute a single SQL query and return results"""
         try:
             start_time = time.time()
+            
+            # Validate query for security - block dangerous operations
+            self._validate_query(sql)
             
             with pyodbc.connect(self.connection_string, timeout=30) as conn:
                 cursor = conn.cursor()
@@ -300,6 +326,9 @@ class DatabaseManager:
         """Execute SQL query and return results"""
         try:
             start_time = time.time()
+            
+            # Validate query for security - block dangerous operations
+            self._validate_query(sql)
             
             # Check for multiple SELECT statements
             selects = re.findall(r'SELECT\s+.+?FROM\s+\[?(\w+)\]?', sql, re.IGNORECASE | re.DOTALL)
